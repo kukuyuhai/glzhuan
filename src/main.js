@@ -13,6 +13,8 @@ import wechatAuth from './plugins/wechatAuth'//微信登录插件
 import './filter'
 const qs = require('qs') 
 
+// 注释一下
+
 
 FastClick.attach(document.body)
 
