@@ -8,6 +8,7 @@ import request from '../utils/request'
  *          accessToken:'xxx',
  *          refreshToken:'xxx',
  *          userInfo:{}
+ * 测试下
  *       }
  */
 export function loginByCode (data) {
