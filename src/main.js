@@ -11,7 +11,8 @@ import { DatetimePlugin, CloseDialogsPlugin, ConfigPlugin, BusPlugin, DevicePlug
 import wechatAuth from './plugins/wechatAuth'//微信登录插件
 // import './utils/rem'//rem适配
 import './filter'
-const qs = require('qs')
+const qs = require('qs') 
+
 
 FastClick.attach(document.body)
 
