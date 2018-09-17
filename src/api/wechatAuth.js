@@ -9,6 +9,7 @@ import request from '../utils/request'
  *          refreshToken:'xxx',
  *          userInfo:{}
  *       }
+ * hello
  */
 export function loginByCode (data) {
   return request({
