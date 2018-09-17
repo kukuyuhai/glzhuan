@@ -42,10 +42,16 @@ export default new Router({
       path: '/my/trado',
       name: "trado",
       component: () => import('../components/Trado.vue'),
-    }, {
+    }, 
+    {
       path: '/my/trado/details',
       name: "tradoDeails",
       component: () => import('../components/TradoDetails.vue')
+    },
+     {
+      path: '/my/help',
+      name: 'Help',
+      component: () => import('../components/Help.vue')
     }
   ]
 })

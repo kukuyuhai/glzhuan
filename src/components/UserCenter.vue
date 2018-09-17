@@ -21,7 +21,7 @@
             <group>
                 <cell title="奖金明细"  :link="{path:'/reward/details'}" is-link></cell>
                 <cell title="我的提现" :link="{path:'/my/trado'}" is-link></cell>
-                <cell title="常见问题" is-link></cell>
+                <cell title="常见问题" :link="{path:'my/help'}" is-link></cell>
             </group>
         </div>
     </div>
