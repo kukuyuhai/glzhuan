@@ -3,31 +3,31 @@
     <div v-transfer-dom>
       <loading v-model="isLoading"></loading>
     </div>
-    <view-box ref="viewBox" :body-padding-top="0" :body-padding-bottom="isShowTabbar ? '55px' : '0'">
+    <view-box ref="viewBox" :body-padding-top="0" :body-padding-bottom="isShowTabbar ? '50px' : '0'">
       <transition
         @after-enter="$vux.bus && $vux.bus.$emit('vux:after-view-enter')"
         :name="viewTransition" :css="!!direction">
-          <router-view class="router-view"></router-view>
+          <router-view v-wechat-title="$route.meta.title" class="router-view"></router-view>
       </transition>
       <tabbar class="vux-demo-tabbar" icon-class="vux-center" v-show="isShowTabbar" slot="bottom">
         <tabbar-item :link="{path:'/'}" :selected="route.path === '/'">
-          <span class="demo-icon-22 vux-demo-tabbar-icon-home" slot="icon" style="position:relative;top: -2px;">&#xe637;</span>
-          <span slot="label">首页</span>
+          <span class="demo-icon-22 vux-demo-tabbar-icon-home" slot="icon" style="position:relative;top: -2px;">&#xe649;</span>
+          <span slot="label">调查</span>
         </tabbar-item>
         <tabbar-item :link="{path:'/withdraw'}" :selected="route.path === '/withdraw'">
-          <span class="demo-icon-22" slot="icon">&#xe633;</span>
+          <span class="demo-icon-22" slot="icon">&#xe7d1;</span>
           <span slot="label">
             <span>提现</span></span>
         </tabbar-item>
         <tabbar-item :link="{path:'/friends'}" :selected="route.path === '/friends'">
-          <span class="demo-icon-22" slot="icon">&#xe633;</span>
+          <span class="demo-icon-22" slot="icon">&#xe6ca;</span>
           <span slot="label">
             <span>邀请好友</span></span>
         </tabbar-item>
         <tabbar-item :link="{path:'/user'}" :selected="route.path === '/user'">
-          <span class="demo-icon-22" slot="icon">&#xe633;</span>
+          <span class="demo-icon-22" slot="icon">&#xe78b;</span>
           <span slot="label">
-            <span>我</span></span>
+            <span>我的</span></span>
         </tabbar-item>
       </tabbar>
     </view-box>
@@ -53,7 +53,7 @@ export default {
       route: state => state.route,
       path: state => state.route.path,
       deviceready: state => state.app.deviceready,
-      demoTop: state => state.vux.demoScrollTop,
+      demoTop: state => state.vux.wxScrollTop,
       isLoading: state => state.vux.isLoading,
       direction: state => state.vux.direction
     }),
@@ -90,7 +90,7 @@ body {
 }
 
 .demo-icon-22 {
-  font-family: "vux-demo";
+  font-family: "glzhuan";
   font-size: 22px;
   color: #888;
 }
@@ -125,28 +125,12 @@ body {
 }
 
 @font-face {
-  font-family: "vux-demo"; /* project id 70323 */
-  src: url("//at.alicdn.com/t/font_70323_wlronpvr565yiudi.eot");
-  src: url("//at.alicdn.com/t/font_70323_wlronpvr565yiudi.eot?#iefix")
-      format("embedded-opentype"),
-    url("//at.alicdn.com/t/font_70323_wlronpvr565yiudi.woff") format("woff"),
-    url("//at.alicdn.com/t/font_70323_wlronpvr565yiudi.ttf") format("truetype"),
-    url("//at.alicdn.com/t/font_70323_wlronpvr565yiudi.svg#iconfont")
-      format("svg");
-}
-
-.demo-icon {
-  font-family: "vux-demo";
-  font-size: 20px;
-  color: #04be02;
-}
-
-.demo-icon-big {
-  font-size: 28px;
-}
-
-.demo-icon:before {
-  content: attr(icon);
+  font-family: 'glzhuan';  /* project id 842172 */
+  src: url('//at.alicdn.com/t/font_842172_6nbmq7uxmqn.eot');
+  src: url('//at.alicdn.com/t/font_842172_6nbmq7uxmqn.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_842172_6nbmq7uxmqn.woff') format('woff'),
+  url('//at.alicdn.com/t/font_842172_6nbmq7uxmqn.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_842172_6nbmq7uxmqn.svg#iconfont') format('svg');
 }
 
 .router-view {
@@ -184,4 +168,14 @@ body {
 .menu-title {
   color: #888;
 }
+
+.text-color-red{
+  color:@theme-color;
+}
+
+.submit_button{
+  width: 95%;
+  margin: 2rem auto;
+}
+
 </style>

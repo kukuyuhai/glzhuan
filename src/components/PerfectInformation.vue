@@ -1,42 +1,46 @@
 <template>
-    <div>
-        <group title="提高正确的跟人信息，有助于获得更多金币">
-        <cell title="性别">
-            <div>
-            <span style="color: green">Hi, I\'m Vux.</span>
-            </div>
-        </cell>
-        <!-- 出生日期 -->
-        <datetime
-        v-model="value1"
-        @on-change="change"
-        title="出生日期"
-        @on-cancel="log('cancel')"
-        @on-confirm="onConfirm"
-        @on-hide="log('hide', $event)"></datetime>
-        <!-- 城市 -->
-        <x-address 
-        @on-hide="logHide" 
-        @on-show="logShow" 
-        :title="title" 
-        v-model="value" 
-        :list="addressData" 
-        @on-shadow-change="onShadowChange" 
-        placeholder="" 
-        :show.sync="showAddress"></x-address>
-        </group>
+  <div>
+    <group title="提高正确的跟人信息，有助于获得更多金币">
+      <popup-radio title="性别" :options="options2" v-model="option2" @on-hide="hidePopRadio">
+        <p slot="popup-header" class="vux-1px-b demo3-slot">请选择您的性别</p>
+      </popup-radio>
+      <!-- 出生日期 -->
+      <datetime
+      v-model="value1"
+      @on-change="change"
+      title="出生日期"
+      @on-cancel="log('cancel')"
+      @on-confirm="onConfirm"
+      @on-hide="log('hide', $event)"></datetime>
+      <!-- 城市 -->
+      <x-address 
+      @on-hide="logHide" 
+      @on-show="logShow" 
+      :title="title" 
+      v-model="value" 
+      :list="addressData" 
+      @on-shadow-change="onShadowChange" 
+      placeholder="" 
+      :show.sync="showAddress"></x-address>
+    </group>
+    <div class="submit_button">
+      <x-button type="primary" action-type="button">提现</x-button>
     </div>
+
+  </div>
 </template>
 
 <script>
-import { Datetime, Group, Cell, ChinaAddressV4Data, XAddress } from "vux";
+import { Datetime, Group, Cell, ChinaAddressV4Data, XAddress ,PopupRadio,XButton } from "vux";
 export default {
   name: "PerfectInfomation",
   components: {
     Group,
     Cell,
     Datetime,
-    XAddress
+    XAddress,
+    PopupRadio,
+    XButton
   },
   data() {
     return {
@@ -44,7 +48,15 @@ export default {
       value: [],
       addressData: ChinaAddressV4Data,
       title: "城市",
-      showAddress:false
+      showAddress:false,
+      option2: '',
+      options2: [{
+        key: '1',
+        value: '男'
+      }, {
+        key: '2',
+        value: '女'
+      }],
     };
   },
   methods: {
@@ -84,8 +96,19 @@ export default {
     },
     logShow(str) {
       console.log("on-show");
+    },
+    hidePopRadio(){
+      console.log(this.option2)
     }
   }
 };
 </script>
+
+<style scoped>
+.demo3-slot {
+  text-align: center;
+  padding: 8px 0;
+  color: #888;
+}
+</style>
 

@@ -14,9 +14,9 @@ import {
 
 
 const state = {
-  loginStatus: loadLoginStatus(),//登录状态
-  token: loadToken(),//token
-  userInfo: loadUserInfo(),//用户登录信息
+    loginStatus: loadLoginStatus(),//登录状态
+    token: loadToken(),//token
+    userInfo: loadUserInfo(),//用户登录信息
 }
 
 const actions = {
@@ -24,7 +24,7 @@ const actions = {
     loginWechatAuth: ({ commit, state }, query) => {
         console.log("actions:query" + query)
         return new Promise((resolve, reject) => {
-            resolve({status:1})
+            resolve({ status: 1, code: query })
         })
     },
     //设置状态
@@ -58,9 +58,9 @@ const mutations = {
 
 
 const getters = {
-    userInfo : state => state.userInfo,
-    loginStatus : state => state.loginStatus,
-    token : state => state.token
+    userInfo: state => state.userInfo,
+    loginStatus: state => state.loginStatus,
+    token: state => state.token
 }
 
 export default {

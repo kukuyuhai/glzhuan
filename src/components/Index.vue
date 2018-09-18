@@ -7,7 +7,8 @@
     <div v-if="activeIndex== 0">
       <a style="display: block;margin:.625rem;padding:1rem 1.625rem;background:#fff;box-sizing:border-box;border-radius:.375rem;position:relative;" :href="item.Url" v-for="item in list">
         <div class="question_number_id" style="font-size:1.125rem;border-bottom:1px solid #eaeaea;padding-bottom:.5rem;margin-bottom:.5rem;display:flex;align-items:center;color:#000;">
-          <span style="font-size:1rem;">{{item.Name}} </span><span style="color:#999;font-size:.75rem;margin-left:6px;flex:1;">报错</span>
+          <span style="font-size:1rem;">{{item.Name}} </span>
+          <router-link :to="{path: `/feedback/${item.ProjectId}`}" style="color:#999;font-size:.75rem;margin-left:6px;flex:1;">报错</router-link>
           <x-icon type="ios-arrow-right" size="18"></x-icon>
         </div>
         <div class="question_flex">

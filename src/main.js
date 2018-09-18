@@ -9,18 +9,18 @@ import router from './router'
 import store from './store'
 import { DatetimePlugin, CloseDialogsPlugin, ConfigPlugin, BusPlugin, DevicePlugin, ToastPlugin, AlertPlugin, ConfirmPlugin, LoadingPlugin, WechatPlugin, AjaxPlugin, AppPlugin } from 'vux'
 import wechatAuth from './plugins/wechatAuth'//微信登录插件
-// import './utils/rem'//rem适配
 import './filter'
-const qs = require('qs') 
+const qs = require('qs')
 
-// 注释一下
-
-
+// 移除手机click事件300ms的延迟问题
 FastClick.attach(document.body)
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 
 Vue.use(Vuex)
+
+//动态修改title的插件 
+Vue.use(require('vue-wechat-title'))
 
 // let store = new Vuex.Store({})
 
@@ -31,13 +31,13 @@ const shouldUseTransition = !/transition=none/.test(location.href)
 
 store.registerModule('vux', {
   state: {
-    demoScrollTop: 0,
+    wxScrollTop: 0,
     isLoading: false,
     direction: shouldUseTransition ? 'forward' : ''
   },
   mutations: {
     updateDemoPosition(state, payload) {
-      state.demoScrollTop = payload.top
+      state.wxScrollTop = payload.top
     },
     updateLoadingStatus(state, payload) {
       state.isLoading = payload.isLoading
@@ -146,42 +146,32 @@ router.beforeEach(function (to, from, next) {
       window.location.href = wechatAuth.authUrl
     } else if (store.state.user.loginStatus == 1) {
       console.log("store.state.user.loginStatus == 1")
-      if (window.location.href.indexOf('code') > -1) {
-        let url = window.location.href.split("?")[1];
-        let urlstr = url.split("#")[0]
-        let fullPath = `${to.path}?${urlstr}`
-
-        console.log(fullPath)
+      // Solve the bug of WeChat callback address code before #
+      if (window.location.href.indexOf("?") > -1) {
+        let url = window.location.href.split("?")[1].split("#")[0];
+        let fullPath = `${to.path}?${url}`
         try {
           wechatAuth.returnFromWechat(fullPath)
         } catch (err) {
           store.dispatch('setLoginStatus', 0)
           next()
         }
-
-
-        // console.log(to.fullPath)
-        // 
-        //  ? url.split("#")[0] : "";
-
-        // let fullPath = `${to.path}?${urlstr}`
-
-
-        console.log("wechatAuth.codefullPath:" + wechatAuth.code);
-        store.dispatch('loginWechatAuth', "wechatAuth.code").then((res) => {
+        store.dispatch('loginWechatAuth', wechatAuth.code).then((res) => {
           console.log(res)
           if (res.status == 1) {
             store.dispatch('setLoginStatus', 2)
-            // window.location.href = `${window.location.href.split("?")[0]}#${to.path}`
+            window.location.href = `${window.location.href.split("?")[0]}#${to.path}`
           } else {
             store.dispatch('setLoginStatus', 0)
           }
           next()
-
         }).catch((err) => {
           console.log("err" + err)
           next()
         })
+      } else {
+        store.dispatch('setLoginStatus', 0)
+        next();
       }
     } else {
       next()

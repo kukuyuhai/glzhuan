@@ -16,13 +16,8 @@
 </template>
 
 <script>
-import { dateFormat } from "vux";
-
 export default {
   name: "Trado",
-  filters: {
-    dateFormat
-  },
   data() {
     return {
       list: [

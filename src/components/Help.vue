@@ -29,13 +29,14 @@
 }
 
 .help_content {
-  font-size: 0.75rem;
+  font-size: .875rem;
   visibility: hidden;
-  max-height: 0;
+  color: #999;
+  height: 0;
 }
 
 .help_item_show {
-  max-height: 300px;
+  height: auto;
   overflow: hidden;
   visibility: visible;
   margin-top: .375rem;
